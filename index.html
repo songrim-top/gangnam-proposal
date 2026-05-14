@@ -1,0 +1,2593 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>강남여성병원 × 건나물TV 운영 전략 제안서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0a;
+    --card: #111111;
+    --sub: #1a1a1a;
+    --gold: #C8A96E;
+    --gold-light: #E8D5A3;
+    --text: #ffffff;
+    --text-sub: #888888;
+    --divider: #2a2a2a;
+  }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    line-height: 1.8;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 노이즈 텍스처 */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.03;
+    background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 0);
+    background-size: 3px 3px;
+  }
+
+  section {
+    position: relative;
+    z-index: 2;
+    padding: 120px 24px;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .text-block {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    color: var(--gold);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    margin-bottom: 32px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-align: center;
+    margin-bottom: 80px;
+    white-space: pre-line;
+  }
+
+  /* 페이드인 (스크롤 트리거) */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============================================ */
+  /* SECTION 1 — HERO (건나물TV vs 강남여성병원 대비) */
+  /* ============================================ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 24px 80px;
+    position: relative;
+  }
+
+  .hero-channel {
+    width: 100%;
+    max-width: 960px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .hero-channel.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-channel-label {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    margin-bottom: 40px;
+  }
+  .hero-channel-gunmul .hero-channel-label { color: var(--gold); }
+  .hero-channel-gangnam .hero-channel-label { color: var(--text); }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 80px;
+    flex-wrap: wrap;
+  }
+
+  .hero-stat {
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .hero-stat-value {
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    display: block;
+  }
+
+  .hero-stats-gunmul .hero-stat-value {
+    font-size: 64px;
+    color: #C8A96E; /* fallback */
+    background: linear-gradient(135deg, #E8D5A3 0%, #C8A96E 50%, #A07840 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-stats-gangnam .hero-stat-value {
+    font-size: 40px;
+    color: var(--text);
+  }
+
+  .hero-stat-label {
+    color: var(--text-sub);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    margin-top: 18px;
+  }
+
+  .hero-comparison-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--divider);
+    margin: 56px 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .hero-comparison-divider.show { opacity: 1; }
+
+  .hero-message {
+    margin-top: 72px;
+    color: var(--text);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.8;
+    white-space: pre-line;
+    max-width: 640px;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .hero-message.show { opacity: 1; }
+
+  .hero-accent {
+    margin-top: 32px;
+    color: var(--gold);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.7;
+    max-width: 640px;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .hero-accent.show { opacity: 1; }
+
+  .scroll-arrow {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 28px;
+    animation: bounce 2s infinite;
+    opacity: 0.7;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+  }
+
+  /* ============================================ */
+  /* SECTION 2 — 현황 진단 */
+  /* ============================================ */
+  .diagnose-card {
+    background: var(--card);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    padding: 80px 40px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  /* 카드 분해 애니메이션 */
+  .split-animation {
+    height: 200px;
+    position: relative;
+    margin-bottom: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .video-card {
+    width: 160px;
+    height: 100px;
+    background: var(--sub);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-weight: 500;
+    font-size: 16px;
+    position: absolute;
+    transition: transform 0.3s ease, opacity 0.25s ease;
+  }
+
+  .split-animation.split .video-card.original {
+    opacity: 0;
+  }
+
+  .video-card.left {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  .video-card.right {
+    opacity: 0;
+    transform: translateX(0);
+  }
+
+  .split-animation.split .video-card.left {
+    opacity: 1;
+    transform: translateX(-100px);
+  }
+  .split-animation.split .video-card.right {
+    opacity: 1;
+    transform: translateX(100px);
+  }
+
+  .diagnose-text {
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1.8;
+    white-space: pre-line;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .big-money {
+    font-size: 96px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+  }
+
+  .money-label {
+    color: var(--text-sub);
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+
+  .money-formula {
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1.8;
+    white-space: pre-line;
+    padding-top: 32px;
+    border-top: 1px solid var(--divider);
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .algo-headline {
+    color: var(--gold);
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    line-height: 1.5;
+  }
+
+
+  /* ============================================ */
+  /* SECTION 4 — 건나물TV */
+  /* ============================================ */
+  .gunmul {
+    background: var(--card);
+  }
+
+  .gunmul-big-num {
+    text-align: center;
+    font-size: 120px;
+    font-weight: 900;
+    color: var(--gold);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .gunmul-num-label {
+    text-align: center;
+    color: var(--text-sub);
+    font-size: 16px;
+    letter-spacing: 0.2em;
+    margin-bottom: 64px;
+  }
+
+  .gunmul-desc {
+    text-align: center;
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1.9;
+    max-width: 640px;
+    margin: 0 auto 64px;
+    white-space: pre-line;
+  }
+
+  .gunmul-footer {
+    text-align: center;
+    color: var(--gold-light);
+    font-size: 18px;
+    line-height: 1.8;
+    white-space: pre-line;
+  }
+
+  /* ============================================ */
+  /* SECTION 5 — 플랜 비교 */
+  /* ============================================ */
+  .plan-intro {
+    text-align: center;
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1.9;
+    white-space: pre-line;
+    max-width: 640px;
+    margin: 0 auto 72px;
+  }
+  .plan-intro strong {
+    color: #C8A96E; /* fallback */
+    background: linear-gradient(135deg, #E8D5A3 0%, #C8A96E 50%, #A07840 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 100px;
+  }
+
+  .plan-card {
+    background: var(--card);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    padding: 48px 28px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .plan-card.current { opacity: 0.5; }
+
+  .plan-card.basic {
+    border-color: var(--gold);
+    border-width: 2px;
+  }
+
+  .plan-card.premium {
+    background: linear-gradient(180deg, rgba(232, 213, 163, 0.15) 0%, var(--card) 100%);
+    border-color: var(--gold-light);
+  }
+
+  .plan-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--bg);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 20px;
+    letter-spacing: 0.1em;
+  }
+
+  .plan-label {
+    color: var(--text-sub);
+    font-size: 14px;
+    margin-bottom: 16px;
+    letter-spacing: 0.1em;
+  }
+
+  .plan-price {
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .plan-card.basic .plan-price,
+  .plan-card.premium .plan-price {
+    color: var(--gold);
+  }
+
+  .plan-sub {
+    color: var(--text-sub);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .plan-divider {
+    height: 1px;
+    background: var(--divider);
+    margin: 24px 0;
+  }
+
+  .plan-price-unit {
+    font-size: 0.42em;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--text-sub);
+    -webkit-text-fill-color: var(--text-sub);
+    background: none;
+  }
+
+  .plan-subtitle {
+    color: var(--text-sub);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+
+  .plan-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+  .plan-check {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    align-items: flex-start;
+  }
+  .plan-check-icon {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+  .plan-check--no .plan-check-icon {
+    color: var(--text-sub);
+  }
+  .plan-check-body {
+    flex: 1;
+  }
+  .plan-check-title {
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .plan-check-detail {
+    color: var(--text-sub);
+    font-size: 12px;
+    margin-top: 4px;
+    line-height: 1.6;
+  }
+
+  .plan-unit {
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .plan-feature {
+    color: var(--text-sub);
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .plan-card.basic .plan-feature,
+  .plan-card.premium .plan-feature {
+    color: var(--text);
+  }
+
+  /* 토글 */
+  .toggle-section {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 60px 40px;
+    margin-top: 40px;
+  }
+
+  .toggle-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .toggle-btn {
+    background: transparent;
+    color: var(--text-sub);
+    border: 1px solid var(--divider);
+    padding: 14px 32px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+
+  .toggle-btn:hover {
+    color: var(--text);
+    border-color: var(--gold);
+  }
+
+  .toggle-btn.active {
+    background: var(--gold);
+    color: var(--bg);
+    border-color: var(--gold);
+  }
+
+  .toggle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .toggle-item {
+    background: var(--sub);
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .toggle-item-label {
+    color: var(--text);
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .toggle-item-value {
+    color: var(--gold);
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1.1;
+    transition: opacity 0.3s ease;
+  }
+
+  /* ============================================ */
+  /* SECTION 7 — 성장 차트 */
+  /* ============================================ */
+  .chart-wrapper {
+    background: var(--card);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 48px;
+  }
+
+  #growthChart {
+    width: 100%;
+    height: 400px;
+    display: block;
+  }
+
+  .chart-legend {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+    font-size: 14px;
+  }
+
+  .legend-line {
+    width: 32px;
+    height: 3px;
+  }
+
+  .legend-line.dashed {
+    background: repeating-linear-gradient(90deg, var(--text-sub) 0 6px, transparent 6px 10px);
+  }
+
+  .legend-line.solid {
+    background: var(--gold);
+  }
+
+  .chart-result {
+    text-align: center;
+    color: var(--text);
+    font-size: 19px;
+    line-height: 1.8;
+    white-space: pre-line;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* 2년의 자산 — 인터랙티브 비교 섹션 */
+  .asset-toggle-section {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 56px 40px;
+    max-width: 720px;
+    margin: 0 auto 64px;
+  }
+
+  .compare-group {
+    margin-top: 40px;
+  }
+  .compare-group:first-of-type {
+    margin-top: 48px;
+  }
+  .compare-group-label {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    margin-bottom: 16px;
+    font-weight: 500;
+    text-align: center;
+  }
+  .compare-group--asset .compare-group-label {
+    color: var(--gold-light);
+  }
+  .compare-rows {
+    background: var(--sub);
+    border-radius: 12px;
+    padding: 4px 28px;
+  }
+  .compare-group--asset .compare-rows {
+    background: linear-gradient(180deg, rgba(232, 213, 163, 0.08) 0%, var(--sub) 100%);
+    border: 1px solid var(--gold-light);
+  }
+  .compare-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--divider);
+    text-align: left;
+  }
+  .compare-row:last-child {
+    border-bottom: none;
+  }
+  .compare-label {
+    color: var(--text);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+  }
+  .compare-value {
+    color: var(--gold);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    transition: opacity 0.3s ease;
+  }
+  .compare-value--lg {
+    font-size: 28px;
+    color: var(--gold-light);
+  }
+  .asset-note {
+    text-align: center;
+    margin-top: 36px;
+    color: var(--text-sub);
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  /* ============================================ */
+  /* SECTION 8 — 클로징 */
+  /* ============================================ */
+  .closing {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .closing-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .closing-channel {
+    color: var(--gold);
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-top: 48px;
+    margin-bottom: 48px;
+  }
+
+  .closing-headline {
+    font-size: 56px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #E8D5A3 0%, #C8A96E 50%, #A07840 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 24px;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .closing-text {
+    color: var(--text);
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.6;
+    white-space: pre-line;
+    max-width: 640px;
+  }
+
+  /* ============================================ */
+  /* 네비게이션 */
+  /* ============================================ */
+  .topnav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #0f0f0f;
+    border-bottom: 1px solid #2a2a2a;
+    padding: 16px 24px;
+  }
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  .nav-logo {
+    color: var(--gold);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+  }
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-menu a {
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    letter-spacing: 0.02em;
+  }
+  .nav-menu a:hover { color: var(--gold); }
+  .nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    transition: all 0.3s ease;
+  }
+
+  /* ============================================ */
+  /* 아코디언 */
+  /* ============================================ */
+  .accordion-list {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .accordion-item {
+    background: var(--card);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+  .accordion-item.open { border-color: var(--gold); }
+  .accordion-header {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 28px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    color: var(--text);
+    text-align: left;
+    font-family: inherit;
+  }
+  .accordion-type {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .accordion-title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .accordion-icon {
+    color: var(--gold);
+    font-size: 28px;
+    font-weight: 300;
+    transition: transform 0.4s ease;
+    margin-left: 16px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .accordion-item.open .accordion-icon { transform: rotate(45deg); }
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  .accordion-item.open .accordion-body { max-height: 400px; }
+  .accordion-item.accordion-tall.open .accordion-body { max-height: 1500px; }
+  .accordion-content {
+    padding: 0 36px 32px;
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.9;
+    white-space: pre-line;
+  }
+
+  /* ============================================ */
+  /* 5 Layers (서비스) — 아코디언 body 내부 보조 영역 */
+  /* ============================================ */
+  .accordion-extra {
+    padding: 0 36px 32px;
+  }
+  .accordion-extra .cta-button {
+    margin-top: 8px;
+  }
+  .accordion-extra .map-wrapper {
+    margin-top: 0;
+  }
+  .cta-button {
+    background: var(--gold);
+    color: var(--bg);
+    border: none;
+    padding: 16px 32px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 32px;
+    font-family: inherit;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .cta-button:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+
+  /* 지도 핫스팟 */
+  .map-wrapper {
+    position: relative;
+    margin-top: 32px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--sub);
+  }
+  .map-wrapper img {
+    width: 100%;
+    display: block;
+  }
+  .hotspot {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background: var(--gold);
+    color: var(--bg);
+    border: 3px solid #0a0a0a;
+    border-radius: 50%;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    font-weight: 700;
+    font-size: 14px;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    animation: hotspot-pulse 2s infinite;
+    padding: 0;
+  }
+  @keyframes hotspot-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(200, 169, 110, 0.6); }
+    50% { box-shadow: 0 0 0 14px rgba(200, 169, 110, 0); }
+  }
+  .hotspot:hover { background: var(--gold-light); }
+  .map-legend {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-top: 24px;
+    flex-wrap: wrap;
+    color: var(--text-sub);
+    font-size: 14px;
+  }
+  .map-legend span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .map-dot {
+    width: 22px;
+    height: 22px;
+    background: var(--gold);
+    color: var(--bg);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  /* ============================================ */
+  /* 모달 */
+  /* ============================================ */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-content {
+    background: var(--card);
+    border: 1px solid var(--gold);
+    border-radius: 16px;
+    padding: 56px 40px 40px;
+    max-width: 520px;
+    width: 100%;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .modal-content.modal-billboard {
+    padding: 24px;
+    max-width: 1200px;
+  }
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    color: var(--text-sub);
+    font-size: 28px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s ease, color 0.2s ease;
+    font-family: inherit;
+    line-height: 1;
+    z-index: 10;
+  }
+  .modal-close:hover {
+    background: var(--sub);
+    color: var(--text);
+  }
+  .modal-header {
+    color: var(--gold);
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-align: center;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+  }
+  .modal-content img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+  }
+  .modal-caption {
+    text-align: center;
+    color: var(--gold);
+    font-size: 14px;
+    margin-top: 16px;
+    letter-spacing: 0.1em;
+  }
+
+  /* 퀴즈 */
+  .quiz-progress {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .quiz-question {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-bottom: 36px;
+    text-align: center;
+  }
+  .quiz-buttons {
+    display: flex;
+    gap: 12px;
+  }
+  .quiz-btn {
+    flex: 1;
+    background: var(--sub);
+    color: var(--text);
+    border: 1px solid var(--divider);
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+  }
+  .quiz-btn:hover {
+    border-color: var(--gold);
+    background: var(--card);
+    color: var(--gold);
+  }
+  .quiz-result { text-align: center; }
+  .quiz-result-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 900;
+  }
+  .quiz-result-msg {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 32px;
+    padding: 0 8px;
+  }
+  .quiz-restart {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 12px 28px;
+    border-radius: 100px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  .quiz-restart:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+
+  /* ============================================ */
+  /* 실행 일정 */
+  /* ============================================ */
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .schedule-step {
+    background: var(--card);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    padding: 40px 28px;
+  }
+  .step-num {
+    color: var(--gold);
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 16px;
+    letter-spacing: -0.04em;
+  }
+  .step-name {
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .step-badge {
+    display: inline-block;
+    color: var(--gold-light);
+    background: rgba(232, 213, 163, 0.08);
+    border: 1px solid var(--gold);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    margin-bottom: 28px;
+  }
+  .step-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .step-list li {
+    color: var(--text-sub);
+    font-size: 15px;
+    line-height: 1.7;
+    padding: 8px 0 8px 18px;
+    position: relative;
+  }
+  .step-list li::before {
+    content: "•";
+    color: var(--gold);
+    position: absolute;
+    left: 0;
+    top: 8px;
+    font-weight: 700;
+  }
+  .schedule-intro {
+    text-align: center;
+    max-width: 640px;
+    margin: -32px auto 64px;
+    color: var(--text-sub);
+    font-size: 17px;
+    line-height: 1.8;
+    white-space: pre-line;
+  }
+  .schedule-intro strong {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ============================================ */
+  /* 시각 효과: Ambient Glow */
+  /* ============================================ */
+  .ambient-glow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(200, 169, 110, 0.04);
+    filter: blur(80px);
+    pointer-events: none;
+    will-change: transform;
+  }
+  .glow-1 {
+    width: 600px;
+    height: 600px;
+    top: 5%;
+    left: -8%;
+    animation: glow-float-1 25s ease-in-out infinite;
+  }
+  .glow-2 {
+    width: 800px;
+    height: 800px;
+    top: 38%;
+    right: -12%;
+    animation: glow-float-2 35s ease-in-out infinite;
+  }
+  .glow-3 {
+    width: 900px;
+    height: 900px;
+    bottom: 0%;
+    left: 18%;
+    animation: glow-float-3 45s ease-in-out infinite;
+  }
+  @keyframes glow-float-1 {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(80px, 140px); }
+    50%      { transform: translate(180px, -60px); }
+    75%      { transform: translate(-70px, 90px); }
+  }
+  @keyframes glow-float-2 {
+    0%, 100% { transform: translate(0, 0); }
+    33%      { transform: translate(-130px, 110px); }
+    66%      { transform: translate(150px, -170px); }
+  }
+  @keyframes glow-float-3 {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(-170px, -130px); }
+  }
+
+  /* ============================================ */
+  /* 시각 효과: 3D 카드 틸트 (준비) */
+  /* ============================================ */
+  .diagnose-card,
+  .plan-card,
+  .schedule-step,
+  .accordion-item,
+  .toggle-item,
+  .chart-wrapper {
+    transform-style: preserve-3d;
+  }
+
+  /* ============================================ */
+  /* 시각 효과: 골드 그라디언트 텍스트 */
+  /* ============================================ */
+  .gunmul-big-num,
+  .big-money,
+  .plan-price,
+  .toggle-item-value,
+  .section-label,
+  .closing-channel {
+    color: #C8A96E; /* fallback for older Android browsers */
+    background: linear-gradient(135deg, #E8D5A3 0%, #C8A96E 50%, #A07840 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* "현재" 플랜 카드는 의도적으로 회색 처리 (그라디언트 오버라이드) */
+  .plan-card.current .plan-price {
+    color: var(--text-sub) !important;
+    background: none !important;
+    -webkit-text-fill-color: var(--text-sub) !important;
+  }
+
+  /* ============================================ */
+  /* 반응형 */
+  /* ============================================ */
+  @media (max-width: 768px) {
+    section { padding: 80px 20px; }
+
+    .section-title { font-size: 32px; margin-bottom: 56px; }
+
+    .hero-stats { flex-direction: column; gap: 36px; }
+    .hero-stats-gunmul .hero-stat-value { font-size: 48px; }
+    .hero-stats-gangnam .hero-stat-value { font-size: 32px; }
+    .hero-channel-label { font-size: 13px; margin-bottom: 28px; letter-spacing: 0.25em; }
+    .hero-comparison-divider { margin: 44px 0; }
+    .hero-message { font-size: 18px; margin-top: 56px; }
+    .hero-accent { font-size: 17px; margin-top: 28px; }
+
+    .diagnose-card { padding: 56px 24px; }
+    .big-money { font-size: 64px; }
+    .gunmul-big-num { font-size: 72px; }
+    .algo-headline { font-size: 20px; }
+
+    .plans-grid { grid-template-columns: 1fr; gap: 32px; }
+    .plan-price { font-size: 36px; }
+    .asset-toggle-section { padding: 40px 24px; }
+    .compare-rows { padding: 4px 16px; }
+    .compare-value { font-size: 18px; }
+    .compare-value--lg { font-size: 24px; }
+
+    .toggle-section { padding: 40px 24px; }
+    .toggle-grid { grid-template-columns: 1fr; }
+    .toggle-item-value { font-size: 26px; }
+
+
+    .chart-wrapper { padding: 24px; }
+    #growthChart { height: 300px; }
+
+    .closing-channel { font-size: 24px; }
+    .closing-text { font-size: 26px; }
+    .closing-headline { font-size: 36px; }
+
+
+    /* 모바일 네비 */
+    .nav-toggle { display: flex; }
+    .nav-menu {
+      position: absolute;
+      top: calc(100% + 16px);
+      left: -20px;
+      right: -20px;
+      background: #0f0f0f;
+      border-bottom: 1px solid #2a2a2a;
+      flex-direction: column;
+      gap: 0;
+      padding: 8px 24px 16px;
+      display: none;
+    }
+    .nav-menu.open { display: flex; }
+    .nav-menu li { padding: 12px 0; border-bottom: 1px solid #1a1a1a; }
+    .nav-menu li:last-child { border-bottom: none; }
+    .nav-menu a { font-size: 15px; display: block; }
+
+    /* 모바일 컴포넌트 */
+    .accordion-header { padding: 24px 24px; }
+    .accordion-title { font-size: 17px; }
+    .accordion-content { padding: 0 24px 24px; font-size: 15px; }
+
+    .accordion-extra { padding: 0 24px 24px; }
+
+    .schedule-grid { grid-template-columns: 1fr; gap: 16px; }
+    .step-num { font-size: 48px; }
+    .step-name { font-size: 18px; }
+    .step-list li { font-size: 14px; }
+    .schedule-intro { font-size: 16px; margin: -24px auto 48px; }
+
+    .modal-content { padding: 48px 24px 32px; }
+    .quiz-question { font-size: 18px; }
+    .modal-content.modal-billboard { padding: 16px; }
+    .hotspot { width: 30px; height: 30px; font-size: 12px; }
+
+    /* Ambient glow 모바일 축소 (크기/opacity 절반) */
+    .glow {
+      background: rgba(200, 169, 110, 0.02);
+      filter: blur(50px);
+    }
+    .glow-1 { width: 300px; height: 300px; }
+    .glow-2 { width: 400px; height: 400px; }
+    .glow-3 { width: 450px; height: 450px; }
+
+    /* 3D 틸트 비활성화 (preserve-3d 제거) */
+    .diagnose-card,
+    .plan-card,
+    .schedule-step,
+    .accordion-item,
+    .toggle-item,
+    .chart-wrapper {
+      transform-style: flat;
+      perspective: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 60px 16px; }
+    .section-title { font-size: 26px; }
+    .hero-stats-gunmul .hero-stat-value { font-size: 40px; }
+    .hero-stats-gangnam .hero-stat-value { font-size: 28px; }
+    .hero-message { font-size: 17px; }
+    .hero-accent { font-size: 16px; }
+    .gunmul-big-num { font-size: 56px; }
+    .big-money { font-size: 48px; }
+    .closing-text { font-size: 22px; }
+
+    /* 토글 마지막 항목 grid-column 해제 (인라인 style="grid-column: 1/-1" 오버라이드) */
+    .toggle-grid > .toggle-item:last-child { grid-column: auto !important; }
+
+    /* 플랜 가격 폰트 약간 축소 */
+    .plan-price { font-size: 32px; }
+
+    /* 모달 가독성 */
+    .modal-content { padding: 40px 20px 28px; }
+    .quiz-question { font-size: 17px; }
+
+    /* 지도 핫스팟 더 축소 */
+    .hotspot { width: 26px; height: 26px; font-size: 11px; border-width: 2px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================ -->
+<!-- 상단 네비게이션 -->
+<!-- ============================================ -->
+<nav class="topnav">
+  <div class="nav-container">
+    <a href="#" class="nav-logo">강남여성병원 + 건나물TV</a>
+    <button class="nav-toggle" aria-label="메뉴 열기" id="navToggle" type="button">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#diagnosis">현황진단</a></li>
+      <li><a href="#strategy">콘텐츠전략</a></li>
+      <li><a href="#kunnamu">건나물TV</a></li>
+      <li><a href="#service">서비스</a></li>
+      <li><a href="#plan">플랜비교</a></li>
+      <li><a href="#schedule">실행일정</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============================================ -->
+<!-- SECTION 1 — HERO -->
+<!-- ============================================ -->
+<section class="hero">
+  <!-- 건나물TV 블록 (골드, 크게) -->
+  <div class="hero-channel hero-channel-gunmul" id="heroChannelGunmul">
+    <div class="hero-channel-label">건나물TV</div>
+    <div class="hero-stats hero-stats-gunmul">
+      <div class="hero-stat">
+        <div class="hero-stat-value">6년 10개월</div>
+        <div class="hero-stat-label">운영 기간</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" id="gunmulVideos">0</div>
+        <div class="hero-stat-label">콘텐츠</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" id="gunmulSubs">0</div>
+        <div class="hero-stat-label">구독자</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 가운데 수평 구분선 -->
+  <div class="hero-comparison-divider" id="heroDivider"></div>
+
+  <!-- 강남여성병원 블록 (흰색, 작게) -->
+  <div class="hero-channel hero-channel-gangnam" id="heroChannelGangnam">
+    <div class="hero-channel-label">강남여성병원</div>
+    <div class="hero-stats hero-stats-gangnam">
+      <div class="hero-stat">
+        <div class="hero-stat-value">6년</div>
+        <div class="hero-stat-label">운영 기간</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" id="gangnamVideos">0</div>
+        <div class="hero-stat-label">콘텐츠</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value" id="gangnamSubs">0</div>
+        <div class="hero-stat-label">구독자</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 카운트업 완료 후 페이드인 메시지 -->
+  <div class="hero-message" id="heroMessage">질과 양, 둘 다 채워야 합니다.
+빠른 결과보다 쌓이는 신뢰가
+결국 환자를 움직입니다.</div>
+
+  <div class="hero-accent" id="heroAccent">강남여성병원의 다음 챕터를 제안합니다.</div>
+
+  <div class="scroll-arrow">↓</div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 2 — 현황 진단 -->
+<!-- ============================================ -->
+<section id="diagnosis">
+  <div class="container">
+    <div class="section-label fade-in">01 / 현황</div>
+    <h2 class="section-title fade-in">지금 실제로
+일어나고 있는 일</h2>
+
+    <!-- 카드 1: 콘텐츠 분해 -->
+    <div class="diagnose-card fade-in">
+      <div class="split-animation" id="splitAnim">
+        <div class="video-card original">콘텐츠 1편</div>
+        <div class="video-card left">파트 1</div>
+        <div class="video-card right">파트 2</div>
+      </div>
+      <div class="diagnose-text">월 1회 방문. 2편 촬영.
+1편을 둘로 나눠 4편처럼 보이게 만드는 구조.
+실제 콘텐츠는 한 달에 2편입니다.</div>
+    </div>
+
+    <!-- 카드 2: 편당 단가 -->
+    <div class="diagnose-card fade-in">
+      <div class="big-money" id="costNum">₩0</div>
+      <div class="money-label">현재 편당 제작 단가</div>
+      <div class="money-formula">월 480만원 ÷ 실질 2편
+= 편당 240만원</div>
+    </div>
+
+    <!-- 카드 3: 알고리즘 -->
+    <div class="diagnose-card fade-in">
+      <div class="algo-headline">같은 주제, 연속 2편 업로드</div>
+      <div class="diagnose-text">산부인과 시청자가 검색하는 질문은<br>수백 가지입니다.<br>지금 이 채널이 1년에 다루는 주제는<br>24가지뿐입니다.<br><br>콘텐츠가 쌓여야 검색에 잡힙니다.<br>지금 속도로는 그 자리를<br>다른 채널이 먼저 채웁니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 3 — 콘텐츠 전략 -->
+<!-- ============================================ -->
+<section id="strategy">
+  <div class="container">
+    <div class="section-label fade-in">02 / 콘텐츠 전략</div>
+    <h2 class="section-title fade-in">어떻게 신뢰를
+쌓아갈 것인가</h2>
+
+    <div class="accordion-list">
+      <div class="accordion-item">
+        <button class="accordion-header" type="button">
+          <div>
+            <div class="accordion-type">TYPE 01</div>
+            <div class="accordion-title">검색에 잡히는 콘텐츠</div>
+          </div>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">하이푸, 자궁근종, 요실금.
+환자분들이 증상을 검색할 때
+원장님의 영상이 먼저 나와야 합니다.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" type="button">
+          <div>
+            <div class="accordion-type">TYPE 02</div>
+            <div class="accordion-title">증상으로 찾아오는 콘텐츠</div>
+          </div>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">내 증상이 해당되는지 스스로 확인하고 싶은 환자분.
+그 질문에 정확히 답하는 영상이 있다면
+예약 전화로 자연스럽게 이어집니다.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" type="button">
+          <div>
+            <div class="accordion-type">TYPE 03</div>
+            <div class="accordion-title">쌓여서 만들어지는 신뢰</div>
+          </div>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">같은 분야를 깊고 넓게 다룬 영상이
+10편, 20편, 30편 축적될 때
+환자분들은 묻지 않고 선택하게 됩니다.
+원장님이 가장 많이, 가장 깊이
+이야기해온 의사라는 것을 알기 때문입니다.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" type="button">
+          <div>
+            <div class="accordion-type">TYPE 04</div>
+            <div class="accordion-title">롱폼과 쇼츠 운영 원칙</div>
+          </div>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">롱폼은 환자분의 결정을 만드는 신뢰의 본체입니다.
+쇼츠는 그 본편으로 끌어오는 예고편 역할만 합니다.
+
+조회수 위주의 쇼츠 남발이 본편 노출을 잠식한다고
+판단되면 즉시 중단합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 4 — 건나물TV -->
+<!-- ============================================ -->
+<section class="gunmul" id="kunnamu">
+  <div class="container">
+    <div class="section-label fade-in">03 / 건나물TV</div>
+
+    <div class="gunmul-big-num fade-in" id="gunmulNum">0</div>
+    <div class="gunmul-num-label fade-in">구독자</div>
+
+    <div class="gunmul-desc fade-in">건강 정보 단일 주제로 127만 구독자를 모은 채널입니다.
+
+이 채널의 구독자와
+원장님의 잠재 환자는 같은 사람입니다.</div>
+
+    <div class="gunmul-footer fade-in">정기 출연 파트너가 된다는 것은
+원장님 채널이 성장하는 속도와는 다른
+차원의 인지도를 의미합니다.
+
+127만 명이 구독하는 채널이
+원장님을 정기적으로 소개합니다.</div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 5 — 서비스 5 Layers -->
+<!-- ============================================ -->
+<section id="service">
+  <div class="container">
+    <div class="section-label fade-in">04 / 서비스</div>
+    <h2 class="section-title fade-in">건나물TV가
+제공하는 것들</h2>
+
+    <div class="accordion-list">
+      <div class="accordion-item">
+        <button class="accordion-header" type="button">
+          <div>
+            <div class="accordion-type">LAYER 1</div>
+            <div class="accordion-title">원스톱 제작 시스템</div>
+          </div>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">기획, 대본, 촬영, 편집을 전담합니다.
+원장님은 오직 설명에만 집중하시면 됩니다.
+월 2회 방문, 회당 4편 촬영으로 월 8편을 확보합니다.(프리미엄 플랜 기준)</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" type="button">
+          <div>
+            <div class="accordion-type">LAYER 2</div>
+            <div class="accordion-title">검색 최적화(SEO)</div>
+          </div>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">실제 환자들이 검색하는 키워드에 최적화합니다.
+알고리즘이 선호하는 채널 지표를 지속 관리합니다.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" type="button">
+          <div>
+            <div class="accordion-type">LAYER 3</div>
+            <div class="accordion-title">건나물TV 프리미엄 브랜딩</div>
+          </div>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">127만 구독자 채널 정기 출연으로
+성영모 원장님을 대중에게 각인시킵니다.
+원장님의 전문성이 곧 강남여성병원의 자산이 됩니다.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item accordion-tall">
+        <button class="accordion-header" type="button">
+          <div>
+            <div class="accordion-type">LAYER 4</div>
+            <div class="accordion-title">장기 파트너십</div>
+          </div>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">유튜브 채널 운영은 마라톤입니다.
+이 업체, 저 업체를 바꿀 때마다
+채널의 톤이 흔들리고
+쌓아온 신뢰가 흩어집니다.
+
+6년이란 시간을 저희와 함께 하셨다면
+분명 달랐을 겁니다.
+
+저희가 제안드리는 계약 기간은 2년입니다.
+원장님의 브랜딩으로 채널이 자산이 되는 시간,
+그게 2년입니다.</div>
+        </div>
+      </div>
+
+      <div class="accordion-item accordion-tall">
+        <button class="accordion-header" type="button">
+          <div>
+            <div class="accordion-type">LAYER 5</div>
+            <div class="accordion-title">서비스1) 서울 핵심 상권 전광판 <span style="font-size: 0.72em; font-weight: 400; color: var(--text-sub);">(특별할인가 제공)</span></div>
+          </div>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-content">온라인 인지도를 오프라인으로 확장합니다.
+강남대로, 명동, 서울대입구
+당사 보유 전광판에 브랜딩 영상을 송출합니다.
+(해당 가격은 기본가입니다)</div>
+          <div class="accordion-extra">
+            <div class="map-wrapper">
+              <img src="map-001.png" alt="서울 전광판 지도">
+              <button class="hotspot" style="top: 76%; left: 20%;" data-billboard="seoul-univ" aria-label="서울대입구 전광판" type="button">1</button>
+              <button class="hotspot" style="top: 24%; left: 23%;" data-billboard="myeongdong" aria-label="명동 회현사거리 전광판" type="button">2</button>
+              <button class="hotspot" style="top: 68%; left: 78%;" data-billboard="gangnam" aria-label="강남대로 전광판" type="button">3</button>
+            </div>
+            <div class="map-legend">
+              <span><span class="map-dot">1</span> 서울대입구</span>
+              <span><span class="map-dot">2</span> 명동</span>
+              <span><span class="map-dot">3</span> 강남대로</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 7 — 플랜 비교 -->
+<!-- ============================================ -->
+<section id="plan">
+  <div class="container">
+    <div class="section-label fade-in">05 / 제안</div>
+    <h2 class="section-title fade-in">숫자로 보는
+가치의 차이</h2>
+
+    <div class="plan-intro fade-in">단순한 영상 제작 대행이 아닙니다.
+유튜브를 통해 자궁 보존 치료의 권위를 확고히 하고,
+꾸준한 디지털 브랜드 자산을 만들어가는
+<strong>24개월 비즈니스 파트너십</strong> 제안입니다.</div>
+
+    <div class="plans-grid">
+      <div class="plan-card current fade-in">
+        <div class="plan-label">현재</div>
+        <div class="plan-price">₩480만<span class="plan-price-unit"> / 월</span></div>
+        <div class="plan-subtitle">전략 없는 월 2편 운영</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-checklist">
+          <li class="plan-check plan-check--no">
+            <span class="plan-check-icon">✗</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">콘텐츠 전략 없음</div>
+            </div>
+          </li>
+          <li class="plan-check plan-check--no">
+            <span class="plan-check-icon">✗</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">SEO 운영 없음</div>
+            </div>
+          </li>
+          <li class="plan-check plan-check--no">
+            <span class="plan-check-icon">✗</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">건나물TV 출연 없음</div>
+            </div>
+          </li>
+          <li class="plan-check plan-check--no">
+            <span class="plan-check-icon">✗</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">장기 파트너십 부재</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="plan-card basic fade-in">
+        <div class="plan-label">기본 플랜</div>
+        <div class="plan-price">₩500만<span class="plan-price-unit"> / 월</span></div>
+        <div class="plan-subtitle">권위 형성 및 채널 안정 워밍업</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-checklist">
+          <li class="plan-check">
+            <span class="plan-check-icon">✓</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">월 4편 롱폼 + 쇼츠 12편</div>
+              <div class="plan-check-detail">롱폼 1편당 핵심 쇼츠 3편 추출 · 월 1회 촬영</div>
+            </div>
+          </li>
+          <li class="plan-check">
+            <span class="plan-check-icon">✓</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">콘텐츠 전략 + SEO 운영</div>
+              <div class="plan-check-detail">검색 노출 · 알고리즘 관리</div>
+            </div>
+          </li>
+          <li class="plan-check">
+            <span class="plan-check-icon">✓</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">건나물TV 출연 연 4회</div>
+              <div class="plan-check-detail">본편 3회 + 통합본 1회</div>
+            </div>
+          </li>
+          <li class="plan-check">
+            <span class="plan-check-icon">✓</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">24개월 비즈니스 파트너십</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="plan-card premium fade-in">
+        <div class="plan-badge">추천</div>
+        <div class="plan-label">프리미엄 플랜</div>
+        <div class="plan-price">₩800만<span class="plan-price-unit"> / 월</span></div>
+        <div class="plan-subtitle">권위 + 인지도 동시 확장 · 시장 장악</div>
+        <div class="plan-divider"></div>
+        <ul class="plan-checklist">
+          <li class="plan-check">
+            <span class="plan-check-icon">✓</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">월 8편 롱폼 + 쇼츠 12편 이상</div>
+              <div class="plan-check-detail">롱폼 1편당 핵심 쇼츠 1~3편 추출 · 월 2회 촬영</div>
+            </div>
+          </li>
+          <li class="plan-check">
+            <span class="plan-check-icon">✓</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">콘텐츠 전략 + SEO 운영</div>
+              <div class="plan-check-detail">검색 노출 · 알고리즘 관리</div>
+            </div>
+          </li>
+          <li class="plan-check">
+            <span class="plan-check-icon">✓</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">건나물TV 출연 연 8회</div>
+              <div class="plan-check-detail">본편 6회 + 통합본 2회</div>
+            </div>
+          </li>
+          <li class="plan-check">
+            <span class="plan-check-icon">✓</span>
+            <div class="plan-check-body">
+              <div class="plan-check-title">24개월 비즈니스 파트너십</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 7 — 2년의 자산 (인터랙티브 비교) -->
+<!-- ============================================ -->
+<section id="growth">
+  <div class="container">
+    <div class="section-label fade-in">06 / 2년의 자산</div>
+    <h2 class="section-title fade-in">계약이 끝나도
+남는 것들</h2>
+
+    <div class="asset-toggle-section fade-in">
+      <div class="toggle-buttons">
+        <button class="toggle-btn active" data-plan="basic">기본 플랜</button>
+        <button class="toggle-btn" data-plan="premium">프리미엄 플랜</button>
+      </div>
+
+      <div class="compare-group">
+        <div class="compare-group-label">월 운영</div>
+        <div class="compare-rows">
+          <div class="compare-row">
+            <span class="compare-label">월 콘텐츠</span>
+            <span class="compare-value" data-basic="4" data-premium="8" data-suffix="편">4편</span>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">월 촬영 방문</span>
+            <span class="compare-value" data-basic="1" data-premium="2" data-suffix="회">1회</span>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">건나물TV 출연</span>
+            <span class="compare-value" data-basic="4" data-premium="8" data-prefix="연 " data-suffix="회">연 4회</span>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">편당 단가</span>
+            <span class="compare-value" data-basic="125" data-premium="100" data-prefix="₩" data-suffix="만">₩125만</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="compare-group compare-group--asset">
+        <div class="compare-group-label">2년 누적 자산</div>
+        <div class="compare-rows">
+          <div class="compare-row">
+            <span class="compare-label">콘텐츠 자산</span>
+            <span class="compare-value compare-value--lg" data-basic="96" data-premium="192" data-suffix="편">96편</span>
+          </div>
+          <div class="compare-row">
+            <span class="compare-label">건나물TV 누적</span>
+            <span class="compare-value compare-value--lg" data-basic="8" data-premium="16" data-suffix="회">8회</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="asset-note">
+        기본 플랜 — 3월 · 6월 · 9월 개별 출연 + 12월 통합본<br>
+        프리미엄 플랜 — 2·4·6·8·10·12월 개별 출연 + 6월 · 12월 통합본
+      </div>
+    </div>
+
+    <div class="chart-result fade-in">구독자 수는 예측할 수 없습니다.
+하지만 이 콘텐츠들은
+계약이 끝나도 원장님 채널에 남습니다.</div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 10 — 실행 일정 -->
+<!-- ============================================ -->
+<section id="schedule">
+  <div class="container">
+    <div class="section-label fade-in">07 / 실행 일정</div>
+    <h2 class="section-title fade-in">계약 후
+어떻게 진행되나요</h2>
+
+    <div class="schedule-intro fade-in">채널의 안정적인 운영을 위해
+<strong>'선 제작 후 송출'</strong> 프로세스를 원칙으로 합니다.</div>
+
+    <div class="schedule-grid">
+      <div class="schedule-step fade-in">
+        <div class="step-num">01</div>
+        <div class="step-name">사전 준비</div>
+        <div class="step-badge">D-30</div>
+        <ul class="step-list">
+          <li>채널 현황 분석 및 전략 수립</li>
+          <li>콘텐츠 방향 확정 및 첫 촬영 준비</li>
+          <li>4주 분량 세이브 콘텐츠 사전 제작</li>
+        </ul>
+      </div>
+
+      <div class="schedule-step fade-in">
+        <div class="step-num">02</div>
+        <div class="step-name">운영 전환</div>
+        <div class="step-badge">1개월차</div>
+        <ul class="step-list">
+          <li>정기 업로드 개시</li>
+          <li>SEO 최적화 적용</li>
+          <li>건나물TV 첫 출연 일정 조율</li>
+        </ul>
+      </div>
+
+      <div class="schedule-step fade-in">
+        <div class="step-num">03</div>
+        <div class="step-name">안정화</div>
+        <div class="step-badge">2개월차 ~</div>
+        <ul class="step-list">
+          <li>시청 데이터 기반 콘텐츠 고도화</li>
+          <li>원장님 스케줄 맞춤 촬영 시스템 정착</li>
+          <li>월간 성과 리포트 제공</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 11 — 클로징 -->
+<!-- ============================================ -->
+<section class="closing">
+  <div class="closing-divider fade-in"></div>
+  <div class="closing-channel fade-in">건나물TV만이 할 수 있는 약속</div>
+  <div class="closing-text fade-in">자극적인 썸네일과 억지스러운 숏폼으로
+병원의 품격을 떨어뜨리지 않겠습니다.
+
+맨땅에서 시작하는 모험이 아니라,
+이미 갖춰진 탄탄한 기반 위에서
+성과라는 퍼즐을 쌓아 올리는</div>
+  <div class="closing-headline fade-in">'확정된 성공'</div>
+</section>
+
+<!-- ============================================ -->
+<!-- 모달: 자가진단 -->
+<!-- ============================================ -->
+<div class="modal-overlay" id="quizModal" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <button class="modal-close" type="button" aria-label="닫기">×</button>
+    <div class="modal-header">자궁 건강 자가진단</div>
+    <div id="quizBody"></div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- 모달: 전광판 이미지 -->
+<!-- ============================================ -->
+<div class="modal-overlay" id="billboardModal" role="dialog" aria-modal="true">
+  <div class="modal-content modal-billboard">
+    <button class="modal-close" type="button" aria-label="닫기">×</button>
+    <img id="billboardImg" src="" alt="전광판">
+    <div class="modal-caption" id="billboardCaption"></div>
+  </div>
+</div>
+
+<script>
+  // =======================
+  // 카운트업 함수 (easeOut)
+  // =======================
+  function countUp(element, start, end, duration, formatter) {
+    const startTime = performance.now();
+    const fmt = formatter || ((v) => Math.round(v).toLocaleString('en-US'));
+
+    function tick(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // easeOut cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = start + (end - start) * eased;
+      element.textContent = fmt(value);
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        element.textContent = fmt(end);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // =======================
+  // HERO 카운트업 (페이지 로드 1초 후)
+  // =======================
+  window.addEventListener('load', () => {
+    const $ = id => document.getElementById(id);
+    const withSuffix = suffix => v => Math.round(v).toLocaleString('en-US') + suffix;
+
+    // 1) 건나물TV 채널 등장 (T=200ms)
+    setTimeout(() => $('heroChannelGunmul').classList.add('show'), 200);
+
+    // 2) 건나물TV 수치 카운트업 (T=700ms, duration 800ms)
+    //    "6년 10개월"은 텍스트라 카운트업 없음
+    setTimeout(() => {
+      countUp($('gunmulVideos'), 0, 1500, 800, withSuffix('편'));
+      countUp($('gunmulSubs'), 0, 127, 800, v => Math.round(v) + '만');
+    }, 700);
+
+    // 3) 가운데 구분선 (T=1600ms, 카운트업 직후)
+    setTimeout(() => $('heroDivider').classList.add('show'), 1600);
+
+    // 4) 강남여성병원 채널 등장 (T=2000ms)
+    setTimeout(() => $('heroChannelGangnam').classList.add('show'), 2000);
+
+    // 5) 강남여성병원 수치 카운트업 (T=2500ms, duration 800ms)
+    setTimeout(() => {
+      countUp($('gangnamVideos'), 0, 264, 800, withSuffix('편'));
+      countUp($('gangnamSubs'), 0, 6800, 800);
+    }, 2500);
+
+    // 6) 메시지 페이드인 (T=3500ms, 강남 카운트업 끝난 직후)
+    setTimeout(() => $('heroMessage').classList.add('show'), 3500);
+
+    // 7) accent 페이드인 (T=4400ms, 메시지 페이드 완료 후)
+    setTimeout(() => $('heroAccent').classList.add('show'), 4400);
+  });
+
+  // =======================
+  // Intersection Observer — 페이드인 + 트리거
+  // =======================
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+  // =======================
+  // 카드 분리 애니메이션
+  // =======================
+  const splitObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('split');
+        }, 200);
+        splitObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  splitObserver.observe(document.getElementById('splitAnim'));
+
+  // =======================
+  // 편당 단가 카운트업
+  // =======================
+  const costObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        countUp(
+          document.getElementById('costNum'),
+          0, 2400000, 600,
+          (v) => '₩' + Math.round(v).toLocaleString('en-US')
+        );
+        costObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  costObserver.observe(document.getElementById('costNum'));
+
+  // =======================
+  // 건나물TV 구독자 카운트업
+  // =======================
+  const gunmulObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        countUp(document.getElementById('gunmulNum'), 0, 1270000, 800);
+        gunmulObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  gunmulObserver.observe(document.getElementById('gunmulNum'));
+
+  // =======================
+  // 2년의 자산 — 플랜 토글 (07 섹션)
+  // =======================
+  const toggleBtns = document.querySelectorAll('.toggle-btn');
+  const toggleValues = document.querySelectorAll('.compare-value');
+
+  function updateTogglePlan(plan) {
+    toggleValues.forEach(el => {
+      const targetNum = parseInt(el.dataset[plan]);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const currentText = el.textContent.replace(/[^\d]/g, '');
+      const currentNum = parseInt(currentText) || 0;
+
+      countUp(el, currentNum, targetNum, 200, (v) => {
+        const rounded = Math.round(v);
+        return prefix + rounded.toLocaleString('en-US') + suffix;
+      });
+    });
+  }
+
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      toggleBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      updateTogglePlan(btn.dataset.plan);
+    });
+  });
+
+  // 초기 상태 (기본 플랜 표시)
+  setTimeout(() => {
+    toggleValues.forEach(el => {
+      const targetNum = parseInt(el.dataset.basic);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      el.textContent = prefix + targetNum.toLocaleString('en-US') + suffix;
+    });
+  }, 100);
+
+  // =======================
+  // 성장 차트 (Canvas)
+  // =======================
+  function drawChart() {
+    const canvas = document.getElementById('growthChart');
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+
+    const w = rect.width;
+    const h = rect.height;
+    const pad = { top: 30, right: 60, bottom: 50, left: 70 };
+    const chartW = w - pad.left - pad.right;
+    const chartH = h - pad.top - pad.bottom;
+
+    // 데이터
+    const currentSubs = 6800;
+    const monthlyGrowth = 730;
+
+    const currentData = [];
+    const strategyData = [];
+
+    for (let i = 0; i <= 12; i++) {
+      currentData.push(currentSubs + monthlyGrowth * i);
+    }
+
+    // 전략 데이터: 건나물TV 출연 시점마다 급등 (3, 6, 9, 12월)
+    let strategyTotal = currentSubs;
+    strategyData.push(strategyTotal);
+    const monthlyBoost = 1500; // 평시 증가
+    const gunmulBoost = 9000; // 건나물 출연 시 추가 증가
+
+    for (let i = 1; i <= 12; i++) {
+      strategyTotal += monthlyBoost;
+      if (i === 3 || i === 6 || i === 9 || i === 12) {
+        strategyTotal += gunmulBoost;
+      }
+      strategyData.push(strategyTotal);
+    }
+
+    const maxY = 65000;
+
+    // 좌표 변환
+    const xPos = (i) => pad.left + (chartW / 12) * i;
+    const yPos = (v) => pad.top + chartH - (v / maxY) * chartH;
+
+    // 배경 그리드
+    ctx.strokeStyle = '#2a2a2a';
+    ctx.lineWidth = 1;
+    ctx.font = '11px "Noto Sans KR", sans-serif';
+    ctx.fillStyle = '#888888';
+
+    // 가로 그리드
+    for (let i = 0; i <= 5; i++) {
+      const y = pad.top + (chartH / 5) * i;
+      ctx.beginPath();
+      ctx.moveTo(pad.left, y);
+      ctx.lineTo(w - pad.right, y);
+      ctx.stroke();
+      const value = Math.round((maxY * (5 - i)) / 5 / 1000);
+      ctx.textAlign = 'right';
+      ctx.fillText(value + 'k', pad.left - 10, y + 4);
+    }
+
+    // X축 라벨
+    ctx.textAlign = 'center';
+    for (let i = 0; i <= 12; i++) {
+      if (i % 2 === 0) {
+        ctx.fillText(i + '월', xPos(i), h - pad.bottom + 20);
+      }
+    }
+
+    // "현재 방식" 라인 (회색 점선)
+    ctx.strokeStyle = '#888888';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 6]);
+    ctx.beginPath();
+    currentData.forEach((v, i) => {
+      const x = xPos(i);
+      const y = yPos(v);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // 점들
+    ctx.fillStyle = '#888888';
+    currentData.forEach((v, i) => {
+      ctx.beginPath();
+      ctx.arc(xPos(i), yPos(v), 3, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // "전략" 라인 (골드 실선)
+    ctx.strokeStyle = '#C8A96E';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    strategyData.forEach((v, i) => {
+      const x = xPos(i);
+      const y = yPos(v);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    // 점들 (건나물 출연월은 크게)
+    strategyData.forEach((v, i) => {
+      const isGunmul = (i === 3 || i === 6 || i === 9 || i === 12);
+      ctx.fillStyle = isGunmul ? '#E8D5A3' : '#C8A96E';
+      ctx.beginPath();
+      ctx.arc(xPos(i), yPos(v), isGunmul ? 6 : 4, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // 최종 수치 표시
+    ctx.fillStyle = '#C8A96E';
+    ctx.font = 'bold 14px "Noto Sans KR", sans-serif';
+    ctx.textAlign = 'left';
+    const finalStrategy = strategyData[12];
+    ctx.fillText(Math.round(finalStrategy / 1000) + 'k', xPos(12) + 10, yPos(finalStrategy) + 4);
+
+    ctx.fillStyle = '#888888';
+    ctx.font = '12px "Noto Sans KR", sans-serif';
+    const finalCurrent = currentData[12];
+    ctx.fillText(Math.round(finalCurrent / 1000) + 'k', xPos(12) + 10, yPos(finalCurrent) + 4);
+  }
+
+  // 차트 그리기 (스크롤 진입 시)
+  const chartObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        drawChart();
+        chartObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+
+  const growthCanvasEl = document.getElementById('growthChart');
+  if (growthCanvasEl) chartObserver.observe(growthCanvasEl);
+
+  // 리사이즈 대응 (chart redraw + tilt 재평가 + 메뉴/Observer 복구)
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      drawChart();
+      // ① ② 768px 기준 재평가 + 모든 inline transform 초기화
+      if (typeof applyTiltState === 'function') applyTiltState();
+      // 모바일→데스크톱 시 햄버거 메뉴 자동 닫기
+      if (window.innerWidth > 768) {
+        const nm = document.getElementById('navMenu');
+        if (nm) nm.classList.remove('open');
+      }
+      // ③ Intersection Observer 재등록 (방어적)
+      if (typeof fadeObserver !== 'undefined') {
+        fadeObserver.disconnect();
+        document.querySelectorAll('.fade-in:not(.visible)').forEach(el => fadeObserver.observe(el));
+      }
+    }, 200);
+  });
+
+  // =======================
+  // 모바일 네비 토글
+  // =======================
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => navMenu.classList.toggle('open'));
+    document.querySelectorAll('.nav-menu a').forEach(a => {
+      a.addEventListener('click', () => navMenu.classList.remove('open'));
+    });
+  }
+
+  // =======================
+  // 아코디언
+  // =======================
+  document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.parentElement;
+      // 같은 accordion-list 내 다른 항목 모두 닫기 (한 번에 하나만 열림)
+      const list = item.closest('.accordion-list');
+      if (list) {
+        list.querySelectorAll('.accordion-item.open').forEach(other => {
+          if (other !== item) other.classList.remove('open');
+        });
+      }
+      // 현재 항목 토글 (열린 상태면 닫기, 닫힌 상태면 열기)
+      item.classList.toggle('open');
+    });
+  });
+
+  // =======================
+  // 자가진단 퀴즈
+  // =======================
+  const quizModal = document.getElementById('quizModal');
+  const openQuizBtn = document.getElementById('openQuiz');
+  const quizBody = document.getElementById('quizBody');
+
+  const quizQuestions = [
+    '생리량이 예전보다<br>눈에 띄게 늘었나요?',
+    '생리 기간이 7일 이상 지속되거나<br>덩어리 혈이 자주 나오나요?',
+    '아랫배나 허리에<br>묵직한 압박감이 자주 느껴지나요?'
+  ];
+  let quizYes = 0;
+  let quizIdx = 0;
+
+  function startQuiz() {
+    quizYes = 0;
+    quizIdx = 0;
+    renderQuizQuestion();
+  }
+  function renderQuizQuestion() {
+    quizBody.innerHTML =
+      '<div class="quiz-progress">Q' + (quizIdx + 1) + ' / 3</div>' +
+      '<div class="quiz-question">' + quizQuestions[quizIdx] + '</div>' +
+      '<div class="quiz-buttons">' +
+        '<button class="quiz-btn" data-a="yes" type="button">예</button>' +
+        '<button class="quiz-btn" data-a="no" type="button">아니오</button>' +
+      '</div>';
+    quizBody.querySelectorAll('.quiz-btn').forEach(btn => {
+      btn.addEventListener('click', () => answerQuiz(btn.dataset.a));
+    });
+  }
+  function answerQuiz(answer) {
+    if (answer === 'yes') quizYes++;
+    quizIdx++;
+    if (quizIdx < 3) renderQuizQuestion();
+    else renderQuizResult();
+  }
+  function renderQuizResult() {
+    let msg, icon;
+    if (quizYes === 3) {
+      msg = '자궁근종 가능성이 있습니다.<br>정확한 진단이 필요한 시점입니다.';
+      icon = '!';
+    } else if (quizYes === 2) {
+      msg = '증상이 있습니다.<br>전문의 확인을 권장합니다.';
+      icon = '!';
+    } else {
+      msg = '현재는 양호합니다.<br>정기 검진을 유지하세요.';
+      icon = '✓';
+    }
+    quizBody.innerHTML =
+      '<div class="quiz-result">' +
+        '<div class="quiz-result-icon">' + icon + '</div>' +
+        '<div class="quiz-progress">자가진단 결과</div>' +
+        '<div class="quiz-result-msg">' + msg + '</div>' +
+        '<button class="quiz-restart" type="button">다시 진단하기</button>' +
+      '</div>';
+    quizBody.querySelector('.quiz-restart').addEventListener('click', startQuiz);
+  }
+
+  if (openQuizBtn) {
+    openQuizBtn.addEventListener('click', () => {
+      startQuiz();
+      quizModal.classList.add('active');
+    });
+  }
+
+  // =======================
+  // 전광판 핫스팟
+  // =======================
+  const billboards = {
+    'seoul-univ': { img: '서울대-001.png', name: '서울대입구' },
+    'myeongdong': { img: '명동 회현사거리-001.png', name: '명동 회현사거리' },
+    'gangnam': { img: '강남대로-001.png', name: '강남대로' }
+  };
+
+  const billboardModal = document.getElementById('billboardModal');
+  const billboardImg = document.getElementById('billboardImg');
+  const billboardCaption = document.getElementById('billboardCaption');
+
+  document.querySelectorAll('.hotspot').forEach(spot => {
+    spot.addEventListener('click', () => {
+      const data = billboards[spot.dataset.billboard];
+      if (!data) return;
+      billboardImg.src = encodeURI(data.img);
+      billboardImg.alt = data.name + ' 전광판';
+      billboardCaption.textContent = data.name;
+      billboardModal.classList.add('active');
+    });
+  });
+
+  // =======================
+  // 모달 닫기 (오버레이 클릭, X 버튼, ESC)
+  // =======================
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) overlay.classList.remove('active');
+    });
+  });
+  document.querySelectorAll('.modal-close').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.modal-overlay').classList.remove('active');
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+    }
+  });
+
+  // =======================
+  // Ambient Glow 주입
+  // =======================
+  (function injectAmbientGlow() {
+    const wrap = document.createElement('div');
+    wrap.className = 'ambient-glow';
+    wrap.setAttribute('aria-hidden', 'true');
+    wrap.innerHTML =
+      '<div class="glow glow-1"></div>' +
+      '<div class="glow glow-2"></div>' +
+      '<div class="glow glow-3"></div>';
+    document.body.insertBefore(wrap, document.body.firstChild);
+  })();
+
+  // =======================
+  // 3D 카드 틸트
+  // =======================
+  const tiltSelector = '.diagnose-card, .plan-card, .schedule-step, .accordion-item, .toggle-item, .chart-wrapper';
+
+  function tiltMove(e) {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    const ry = (px - 0.5) * 16;
+    const rx = (0.5 - py) * 16;
+    card.style.transition = 'transform 0.1s ease, box-shadow 0.3s ease';
+    card.style.transform = 'perspective(1000px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+    card.style.boxShadow = '0 0 20px rgba(200, 169, 110, 0.15)';
+  }
+  function tiltLeave(e) {
+    const card = e.currentTarget;
+    card.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease';
+    card.style.transform = '';
+    card.style.boxShadow = '';
+  }
+  function attachTilt(cards) {
+    cards.forEach(card => {
+      if (card.dataset.tiltAttached) return;
+      card.dataset.tiltAttached = '1';
+      card.addEventListener('mousemove', tiltMove);
+      card.addEventListener('mouseleave', tiltLeave);
+    });
+  }
+
+  function detachTilt(cards) {
+    cards.forEach(card => {
+      if (!card.dataset.tiltAttached) return;
+      delete card.dataset.tiltAttached;
+      card.removeEventListener('mousemove', tiltMove);
+      card.removeEventListener('mouseleave', tiltLeave);
+    });
+  }
+
+  const tiltSupportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  function applyTiltState() {
+    const cards = document.querySelectorAll(tiltSelector);
+    // ② 모든 카드의 inline transform/box-shadow 초기화 (이전 틸트 상태 잔재 제거)
+    cards.forEach(card => {
+      card.style.transform = '';
+      card.style.boxShadow = '';
+      card.style.transition = '';
+    });
+    // ① 현재 폭에 따라 동적 attach/detach
+    if (tiltSupportsHover && window.innerWidth > 768) {
+      attachTilt(cards);
+    } else {
+      detachTilt(cards);
+    }
+  }
+
+  applyTiltState();
+</script>
+
+</body>
+</html>
